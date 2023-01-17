@@ -1,4 +1,4 @@
-const {createUser,getUser} = require('./components/models/users');
+const {createUser,getUser} = require('../components/models/users');
 
 exports.postUsers = async (req, res) => {
  try{
