@@ -22,7 +22,7 @@ exports.postUsers = async (req, res) => {
 //get a modelo users para obtener los datos
 exports.getUsers = async(req, res) => {
     try{
-        const userAll = User.findAll()
+        const userAll = await User.findAll()
         res.json(userAll)
     }catch(err){
         res.status(400).json({error:err.message})
