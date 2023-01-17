@@ -1,13 +1,25 @@
-const { Pool } = require('pg')
+//const { Pool } = require('pg')
+const { Sequelize } = require('sequelize');
+const user = process.env.DB_USER
+const password = process.env.DB_PASSWORD
+const host = process.env.DB_HOST
+const database = process.env.DB_DATABASE
 
-const pool = new Pool({
-  user: 'guatem',
-  host: 'dpg-cf2t5mha6gdpa6r7se8g-a',
-  database: 'guate',
-  password: 'sMKLZVRz3GW0qA5P0iUbOfPeAvByNAob',
-  port: 5432,
+const sequelize = new Sequelize(database, user, password,{
+  host: host,
+  dialect: 'postgres',
 })
 
-module.exports = {
-  query:(text,params)=>pool.query(text,params)
+sequelize.authenticate()
+.then(()=>{
+  console.log('conexion exitosa')
+})
+.catch(err => {
+  console.log(err)
+})
+
+sequelize.sync({force:false})
+
+module.exports={
+  sequelize
 }
